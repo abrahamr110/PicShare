@@ -34,7 +34,7 @@ class UserController extends Controller {
         
         if (Auth::attempt($credentials)) {
             $usuario = Auth::user(); // Obtiene el usuario autenticado
-            return view('usuario', compact('usuario')); // Redirige a la vista con los datos del usuario
+            return view('user_views.profile', compact('usuario')); // Redirige a la vista con los datos del usuario
         } else {
             return redirect()->back()->with('error', 'Credenciales incorrectas.');
         }
@@ -66,16 +66,16 @@ class UserController extends Controller {
         ]);
 
         Auth::login($user);
-        return redirect()->route('user')->with('success', 'Registro exitoso.');
+        return redirect()->route('home')->with('success', 'Registro exitoso.');
     }
 
     public function doLogout() {
         Auth::logout();
-        return redirect()->route('user.login');
+        return redirect()->route('user.showLogin');
     }
 
-    public function showIndex($id) {
+    public function showProfile($id) {
         $usuario = User::find($id);
-        return view('usuario', compact('usuario'));
+        return view('user_views.profile', compact('usuario'));
     }
 }

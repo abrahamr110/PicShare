@@ -9,13 +9,13 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
         <h2 class="text-2xl font-semibold text-center mb-4">Iniciar Sesión</h2>
-        <form action="{{ route('user.doLogin') }}" method="POST" class="space-y-4">
+        <form action="{{ route('user.showLogin') }}" method="POST" class="space-y-4">
             @csrf
-            <input type="email" placeholder="Correo electrónico" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" name="email" placeholder="Correo electrónico" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('email')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
-            <input type="password" placeholder="Contraseña" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" name="password" placeholder="Contraseña" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('password')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
