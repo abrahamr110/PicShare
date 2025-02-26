@@ -13,7 +13,7 @@ Route::middleware(['guest'])->group(function(){
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/profile/{id}', [UserController::class, 'showProfile'])->name('user.showProfile');
+    Route::get('/profile', [UserController::class, 'showProfile'])->name('user.showProfile');
     Route::get('/logout', [UserController::class, 'doLogout'])->name('user.doLogout');
     Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.showDashboard');
 });

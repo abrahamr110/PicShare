@@ -13,7 +13,7 @@
                 
             </div>
     
-            <a href="{{route('user.showProfile')}}" class="text-sm text-gray-600 hover:text-blue-600 transition">Perfil</a>
+            <a href="{{ route('user.showProfile') }}" class="text-sm text-gray-600 hover:text-blue-600 transition">Perfil</a>
             
             <!-- Menú de Cerrar sesión si el usuario está logueado -->
             @auth

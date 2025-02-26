@@ -74,14 +74,10 @@ class UserController extends Controller {
     }
 
 
-    public function showDashboard()
+    public function showProfile()
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            dd($user);
-            return view('user_views.dashboard', compact('user'));
-        } else {
-            return redirect()->route('user.showLogin');
-        }
+        $user = Auth::user(); // Obtener usuario autenticado
+        return view('user_views.profile', compact('user')); // Mostrar vista con datos del usuario
     }
+
 }
