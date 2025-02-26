@@ -8,6 +8,6 @@
 </head>
 <body>
     @include('partials.header')
-    <h1>Perfil</h1>
+    @include('partials.content')
 </body>
 </html>

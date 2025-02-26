@@ -34,7 +34,7 @@
             <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">Registrarse</button>
         </form>
 
-        <p class="text-center text-gray-600 mt-4 text-sm">¿Ya tienes una cuenta? <a href="#" class="text-blue-500 hover:underline">Inicia sesión</a></p>
+        <p class="text-center text-gray-600 mt-4 text-sm">¿Ya tienes una cuenta? <a href="{{route('user.showLogin')}}" class="text-blue-500 hover:underline">Inicia sesión</a></p>
     </div>
 </body>
 </html>

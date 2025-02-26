@@ -21,7 +21,7 @@
             @enderror
             <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">Iniciar Sesión</button>
         </form>
-        <p class="text-center text-gray-600 mt-4 text-sm">¿No tienes una cuenta? <a href="#" class="text-blue-500 hover:underline">Regístrate</a></p>
+        <p class="text-center text-gray-600 mt-4 text-sm">¿No tienes una cuenta? <a href="{{route('user.showRegister')}}" class="text-blue-500 hover:underline">Regístrate</a></p>
     </div>
 </body>
 </html>

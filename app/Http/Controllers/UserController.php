@@ -33,8 +33,7 @@ class UserController extends Controller {
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
-            $usuario = Auth::user(); // Obtiene el usuario autenticado
-            return view('user_views.profile', compact('usuario')); // Redirige a la vista con los datos del usuario
+            return redirect()->route('home')->with('success', 'Sesión iniciada.');
         } else {
             return redirect()->back()->with('error', 'Credenciales incorrectas.');
         }
@@ -71,11 +70,18 @@ class UserController extends Controller {
 
     public function doLogout() {
         Auth::logout();
-        return redirect()->route('user.showLogin');
+        return redirect()->route('user.showLogin')->with('success', 'Sesión cerrada.');
     }
 
-    public function showProfile($id) {
-        $usuario = User::find($id);
-        return view('user_views.profile', compact('usuario'));
+
+    public function showDashboard()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            dd($user);
+            return view('user_views.dashboard', compact('user'));
+        } else {
+            return redirect()->route('user.showLogin');
+        }
     }
 }
