@@ -81,12 +81,13 @@ class PostController extends Controller
 
     public function like(Post $post)
     {
+        $user = Auth::user();
         // Comprobar si el usuario está logueado
         if (!Auth::check()) {
             return redirect()->route('user.showLogin')->with('error', 'Debes iniciar sesión para dar like.');
         }
 
-        $user = Auth::user();
+        
 
         if ($post->likes()->where('user_id', $user->id)->exists()) {
             $post->likes()->where('user_id', $user->id)->delete(); // Eliminar like si ya lo ha dado
