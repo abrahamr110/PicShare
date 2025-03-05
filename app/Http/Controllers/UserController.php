@@ -77,7 +77,7 @@ class UserController extends Controller {
     public function showProfile()
     {
         $user = Auth::user(); // Obtener usuario autenticado
-        return view('user_views.profile', compact('user')); // Mostrar vista con datos del usuario
+        return view('user_views.profile', compact('user')); // Pasar usuario a la vista
     }
 
 }
