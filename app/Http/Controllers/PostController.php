@@ -33,27 +33,37 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:10000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validación de la imagen
         ], [
             'title.required' => 'El campo Titulo es requerido',
             'title.string' => 'El campo Titulo debe ser una cadena de caracteres',
-            'title.max' => 'El campo Titulo debe tener al menos 255 caracteres',
             'content.required' => 'El campo Contenido es requerido',
             'content.string' => 'El campo Contenido debe ser una cadena de caracteres',
-            'content.max' => 'El campo Contenido debe tener al menos 10000 caracteres',
+            'image.image' => 'El archivo debe ser una imagen',
+            'image.mimes' => 'La imagen debe tener un formato válido (jpeg, png, jpg, gif, svg)',
+            'image.max' => 'La imagen no debe pesar más de 2MB',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Crear el post con el usuario autenticado
+        // Manejo de la imagen
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            // Guarda la imagen en el directorio 'posts'
+            $imagePath = $image->store('posts', 'public');
+        }
+
+        // Crear el post con la imagen
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => Auth::id(), // Asigna el post al usuario autenticado
+            'user_id' => Auth::id(),
+            'image' => $imagePath,  // Guarda la ruta de la imagen
         ]);
 
-        return redirect()->route('user.profile')->with('success', 'Post creado exitosamente.');
-
+        return redirect()->route('post.showIndex')->with('success', 'Post creado exitosamente.');
     }
 }

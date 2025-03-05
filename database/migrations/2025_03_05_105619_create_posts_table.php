@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('publish_date')->nullable();
             $table->unsignedInteger('n_likes')->default(0);
             $table->timestamps();
+            $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
         });
     }
 

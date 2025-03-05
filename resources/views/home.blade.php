@@ -8,6 +8,6 @@
 </head>
 <body>
     @include('partials.header')
-    <h1>aa</h1>
+    <h1 class="bg-fuchsia-700">home</h1>
 </body>
 </html>

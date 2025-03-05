@@ -19,11 +19,11 @@
         @endif
 
         <!-- Formulario para crear post -->
-        <form action="{{ route('post.doCreate') }}" method="POST">
+        <form action="{{ route('post.doCreate') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="title" class="block text-gray-700 font-semibold">Título</label>
-                <input type="text" name="title" id="title" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                <input type="text" name="title" id="title" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" required>
                 @error('title')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -31,8 +31,17 @@
 
             <div class="mb-4">
                 <label for="content" class="block text-gray-700 font-semibold">Contenido</label>
-                <textarea name="content" id="content" rows="5" class="w-full p-2 border border-gray-300 rounded-lg" required></textarea>
+                <textarea name="content" id="content" rows="5" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" required></textarea>
                 @error('content')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Campo para la imagen -->
+            <div class="mb-4">
+                <label for="image" class="block text-gray-700 font-semibold">Imagen</label>
+                <input type="file" name="image" id="image" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500">
+                @error('image')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
@@ -41,14 +50,12 @@
                 <a href="{{ route('user.showProfile') }}" class="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500">
                     Cancelar
                 </a>
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">
+                <button type="submit" class="bg-fuchsia-500 text-white px-6 py-3 rounded-lg hover:bg-fuchsia-600">
                     Publicar
                 </button>
             </div>
         </form>
     </div>
 </div>
-
-
 </body>
 </html>

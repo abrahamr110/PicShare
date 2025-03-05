@@ -4,7 +4,12 @@
             <!-- Sección de Información del Usuario -->
             <div class="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
                 <div class="text-center">
-                    <img src="{{ asset('images/user-avatar.png') }}" alt="Avatar" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <!-- Imagen del Usuario (o imagen predeterminada si no hay imagen) -->
+                    <img 
+                        src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/user-avatar.png') }}" 
+                        alt="Avatar" 
+                        class="w-24 h-24 rounded-full mx-auto mb-4"
+                    >
                     <h2 class="text-2xl font-semibold">{{ $user->name }}</h2>
                     <p class="text-gray-600">{{ $user->email }}</p>
                 </div>
@@ -15,7 +20,7 @@
                 <h3 class="text-xl font-semibold mb-4">Mis Posts</h3>
 
                 <!-- Botón para crear nuevo post -->
-                <a href="{{ route('post.showCreate') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 mb-4 inline-block">
+                <a href="{{ route('post.showCreate') }}" class="bg-fuchsia-500 text-white px-6 py-3 rounded-lg hover:bg-fuchsia-700 mb-4 inline-block">
                     Crear Nuevo Post
                 </a>
 
