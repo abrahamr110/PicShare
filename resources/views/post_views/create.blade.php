@@ -1,6 +1,12 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
 <div class="min-h-screen bg-gray-100 flex flex-col items-center">
     <!-- Contenedor principal -->
     <div class="w-full max-w-4xl p-6 mt-8 bg-white rounded-lg shadow-lg">
@@ -32,7 +38,7 @@
             </div>
 
             <div class="flex justify-between">
-                <a href="{{ route('user.profile') }}" class="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500">
+                <a href="{{ route('user.showProfile') }}" class="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500">
                     Cancelar
                 </a>
                 <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">
@@ -42,4 +48,7 @@
         </form>
     </div>
 </div>
-@endsection
+
+
+</body>
+</html>
