@@ -68,12 +68,10 @@ class PostController extends Controller
     {
         $user = Auth::user();
         
-        // Verificar si ya le dio like
         if ($post->likes()->where('user_id', $user->id)->exists()) {
-            // Si ya dio like, eliminarlo
             $post->likes()->where('user_id', $user->id)->delete();
         } else {
-            // Si no, agregar un like
+
             $post->likes()->create([
                 'user_id' => $user->id
             ]);
@@ -85,14 +83,17 @@ class PostController extends Controller
     public function comment(Request $request, Post $post)
     {
         $request->validate([
-            'coment' => 'required|string|max:10000',
+            'coment' => 'required|string|max:10000',  // Validar comentario
         ]);
 
+        // Guardar el comentario en la base de datos
         $post->comments()->create([
-            'user_id' => Auth::id(),
-            'coment' => $request->coment,
+            'user_id' => Auth::id(),  // El usuario que hace el comentario
+            'coment' => $request->coment,  // El comentario del usuario
         ]);
 
-        return redirect()->back();
+        // Redirigir a la misma página para mostrar el comentario actualizado
+        return redirect()->route('home')->with('success', 'Comentario añadido con éxito!');
     }
+
 }

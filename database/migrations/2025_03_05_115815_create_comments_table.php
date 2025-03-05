@@ -9,25 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('post_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
             $table->text('coment')->nullable();
             $table->date('publish_date')->nullable();
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');  // Relación con el post
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Relación con el usuario
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('comments');
     }
 };
