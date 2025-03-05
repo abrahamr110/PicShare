@@ -17,7 +17,7 @@
             
             <!-- Menú de Cerrar sesión si el usuario está logueado -->
             @auth
-                <a href="{{ route('user.doLogout') }}"  class="text-sm text-gray-600 hover:text-red-600 transition">Cerrar sesión</a>
+                <a href="{{ route('user.doLogout') }}"  class="text-sm text-gray-600 hover:text-fuchsia-600 transition">Cerrar sesión</a>
             @endauth
             @guest
                 <a href="{{ route('user.doLogin') }}" class="text-sm text-gray-600 hover:text-fuchsia-700 transition">Iniciar sesión</a>
@@ -30,7 +30,7 @@
             @auth
                 <form action="{{ route('user.doLogout') }}" method="POST" class="inline">
                     @csrf
-                    <button type="submit" class="text-sm text-gray-600 hover:text-red-600 transition">Cerrar sesión</button>
+                    <button type="submit" class="text-sm text-gray-600 hover:text-fuchsia-600 transition">Cerrar sesión</button>
                 </form>
             @endauth
             @guest

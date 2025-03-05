@@ -4,9 +4,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['guest'])->group(function(){  
-    Route::get('/login', [UserController::class, 'showLogin'])->name('user.showLogin');
-});
 
 Route::middleware(['auth'])->group(function(){  
     Route::get('/profile',[PostController::class,'showProfile'])->name('post.showProfile');
