@@ -63,4 +63,36 @@ class PostController extends Controller
 
         return redirect()->route('post.showProfile')->with('success', 'Post creado exitosamente.');
     }
+
+    public function like(Post $post)
+    {
+        $user = Auth::user();
+        
+        // Verificar si ya le dio like
+        if ($post->likes()->where('user_id', $user->id)->exists()) {
+            // Si ya dio like, eliminarlo
+            $post->likes()->where('user_id', $user->id)->delete();
+        } else {
+            // Si no, agregar un like
+            $post->likes()->create([
+                'user_id' => $user->id
+            ]);
+        }
+
+        return redirect()->back(); // Redirigir de nuevo al post
+    }
+
+    public function comment(Request $request, Post $post)
+    {
+        $request->validate([
+            'coment' => 'required|string|max:10000',
+        ]);
+
+        $post->comments()->create([
+            'user_id' => Auth::id(),
+            'coment' => $request->coment,
+        ]);
+
+        return redirect()->back();
+    }
 }
