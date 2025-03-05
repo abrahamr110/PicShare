@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 
@@ -64,13 +65,26 @@ class PostController extends Controller
         return redirect()->route('post.showProfile')->with('success', 'Post creado exitosamente.');
     }
 
+    public function delete(Post $post)
+    {
+        // Eliminar la imagen del almacenamiento si existe
+        if (Storage::exists('public/' . $post->image)) {
+            Storage::delete('public/' . $post->image);
+        }
+
+        // Eliminar el post
+        $post->delete();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('user.showProfile')->with('success', 'Post eliminado correctamente.');
+    }
+
     public function like(Post $post)
     {
         // Comprobar si el usuario está logueado
-        if (!Auth()->check()) {
+        if (!Auth::check()) {
             return redirect()->route('user.showLogin')->with('error', 'Debes iniciar sesión para dar like.');
         }
-        
 
         $user = Auth::user();
 

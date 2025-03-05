@@ -32,12 +32,22 @@
                                 <h4 class="font-semibold text-lg">{{ $post->title }}</h4>
                                 <p class="text-gray-600">{{ $post->description }}</p>
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="Imagen" class="w-36 h-36 rounded-full mx-auto my-auto mb-4">
+
+                                <!-- Formulario para eliminar el post -->
+                                <form action="{{ route('post.delete', $post->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este post?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-fuchsia-500 hover:text-fuchsia-700">
+                                        <i class="fas fa-trash-alt text-2xl"></i> <!-- Ícono de la papelera -->
+                                    </button>
+                                </form>
                             </div>
                         @endforeach
                     </div>
                 @else
                     <p class="text-gray-500">Aún no has añadido ningún post.</p>
                 @endif
+
             </div>
         </div>
     </div>

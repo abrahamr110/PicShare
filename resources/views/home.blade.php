@@ -15,9 +15,14 @@
             <h1 class="text-2xl font-semibold mb-6">Posts</h1>
             @foreach ($posts as $post)
                 <div class="bg-white p-6 mb-4 rounded-lg shadow-lg">
-                    <img src="{{ $post->image }}" alt="image" class="w-full">
-                    <h3 class="text-lg font-semibold">{{ $post->title }}</h3>
-                    <p class="text-gray-700">{{ $post->description }}</p>
+                    <div class="flex flex-row">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="image" class="w-24 rounded-lg">
+                        <div class="flex flex-col ml-4">
+                            <h3 class="text-lg font-semibold">{{ $post->title }}</h3>
+                            <p class="text-gray-700">{{ $post->description }}</p>
+                        </div>                      
+                    </div>
+                    
 
                     <!-- Formulario para comentar -->
                     <form action="{{ route('post.comment', $post->id) }}" method="POST">
