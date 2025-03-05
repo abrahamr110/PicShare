@@ -38,7 +38,7 @@
                         <!-- Formulario para dar like -->
                         <form action="{{ route('post.like', $post->id) }}" method="POST" class="inline-block">
                             @csrf
-                            <button type="submit" class="text-fuchsia-500 hover:text-fuchsia-700 items-center">
+                            <button type="submit" class="text-fuchsia-500 hover:text-fuchsia-700">
                                 <!-- Icono de corazón -->
                                 <i class="fas fa-heart text-xl"></i>
                             </button>

@@ -66,34 +66,43 @@ class PostController extends Controller
 
     public function like(Post $post)
     {
-        $user = Auth::user();
+        // Comprobar si el usuario está logueado
+        if (!Auth()->check()) {
+            return redirect()->route('user.showLogin')->with('error', 'Debes iniciar sesión para dar like.');
+        }
         
-        if ($post->likes()->where('user_id', $user->id)->exists()) {
-            $post->likes()->where('user_id', $user->id)->delete();
-        } else {
 
+        $user = Auth::user();
+
+        if ($post->likes()->where('user_id', $user->id)->exists()) {
+            $post->likes()->where('user_id', $user->id)->delete(); // Eliminar like si ya lo ha dado
+        } else {
             $post->likes()->create([
                 'user_id' => $user->id
-            ]);
+            ]); // Crear like si no lo ha dado
         }
 
-        return redirect()->back(); // Redirigir de nuevo al post
+        return redirect()->back();
     }
-
+    
     public function comment(Request $request, Post $post)
     {
+        // Comprobar si el usuario está logueado
+        if (!Auth::check()) {
+            return redirect()->route('user.showLogin')->with('error', 'Debes iniciar sesión para comentar.');
+        }
+
+        // Validar el comentario
         $request->validate([
-            'coment' => 'required|string|max:10000',  // Validar comentario
+            'coment' => 'required|string|max:10000',
         ]);
 
         // Guardar el comentario en la base de datos
         $post->comments()->create([
-            'user_id' => Auth::id(),  // El usuario que hace el comentario
-            'coment' => $request->coment,  // El comentario del usuario
+            'user_id' => Auth::id(),
+            'coment' => $request->coment,
         ]);
 
-        // Redirigir a la misma página para mostrar el comentario actualizado
         return redirect()->route('home')->with('success', 'Comentario añadido con éxito!');
     }
-
 }
