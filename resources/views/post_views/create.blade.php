@@ -30,9 +30,9 @@
             </div>
 
             <div class="mb-4">
-                <label for="content" class="block text-gray-700 font-semibold">Contenido</label>
-                <textarea name="content" id="content" rows="5" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" required></textarea>
-                @error('content')
+                <label for="description" class="block text-gray-700 font-semibold">Descripción</label>
+                <textarea name="description" id="description" rows="5" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" required></textarea>
+                @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>

@@ -70,7 +70,7 @@ class UserController extends Controller {
 
     public function doLogout() {
         Auth::logout();
-        return redirect()->route('user.showLogin')->with('success', 'Sesión cerrada.');
+        return redirect()->route('home')->with('success', 'Sesión cerrada.');
     }
 
 

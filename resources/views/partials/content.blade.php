@@ -3,13 +3,7 @@
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Sección de Información del Usuario -->
             <div class="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
-                <div class="text-center">
-                    <!-- Imagen del Usuario (o imagen predeterminada si no hay imagen) -->
-                    <img 
-                        src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/user-avatar.png') }}" 
-                        alt="Avatar" 
-                        class="w-24 h-24 rounded-full mx-auto mb-4"
-                    >
+                <div class="text-center">                 
                     <h2 class="text-2xl font-semibold">{{ $user->name }}</h2>
                     <p class="text-gray-600">{{ $user->email }}</p>
                 </div>
@@ -26,7 +20,7 @@
 
                 @if(session('success'))
                     <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-4">
-                        {{ session('success') }}
+                        {{ session('success') }}1
                     </div>
                 @endif
 
@@ -36,7 +30,8 @@
                         @foreach ($user->posts as $post)
                             <div class="p-4 border border-gray-200 rounded-lg">
                                 <h4 class="font-semibold text-lg">{{ $post->title }}</h4>
-                                <p class="text-gray-600">{{ $post->content }}</p>
+                                <p class="text-gray-600">{{ $post->description }}</p>
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="Imagen" class="w-36 h-36 rounded-full mx-auto my-auto mb-4">
                             </div>
                         @endforeach
                     </div>
